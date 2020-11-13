@@ -152,7 +152,7 @@ KoaBetterRouter.prototype.loadMethods = function loadMethods () {
  * @api public
  */
 
-KoaBetterRouter.prototype.createRoute = function createRoute (method, route, fns) {
+KoaBetterRouter.prototype.createRoute = function createRoute (method, route, right, fns) {
   let args = [].slice.call(arguments, 3)
   let middlewares = utils.arrayify(fns).concat(args)
 
@@ -186,6 +186,7 @@ KoaBetterRouter.prototype.createRoute = function createRoute (method, route, fns
     route: route,
     match: this.route(prefixed),
     method: method,
+    right: right,
     middlewares: middlewares
   }
 }
@@ -251,7 +252,7 @@ KoaBetterRouter.prototype.createRoute = function createRoute (method, route, fns
  * @api public
  */
 
-KoaBetterRouter.prototype.addRoute = function addRoute (method, route, fns) {
+KoaBetterRouter.prototype.addRoute = function addRoute (method, route, right, fns) {
   let routeObject = this.createRoute.apply(this, arguments)
   this.routes.push(routeObject)
   return this
